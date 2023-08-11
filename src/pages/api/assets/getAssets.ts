@@ -6,7 +6,6 @@ export default async function handler(
 ) {
   try {
     const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL + "assets"
-    console.log(apiUrl)
     const response = await fetch(apiUrl)
     const data = await response.json()
     res.status(200).json(data)

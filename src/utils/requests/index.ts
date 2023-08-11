@@ -1,5 +1,5 @@
 import { TractianClient } from "../client"
 
 export const fetchAssetsRequest = () => {
-  return TractianClient.get("/assets/getAssets")
+  return TractianClient.post("/assets/getAssets")
 }
