@@ -1,4 +1,6 @@
 import { CardsList } from "./CardsList"
-import { Chart } from "./Chart"
+import { HealthStatusChart } from "./charts/healthStatusChart"
+import { HealthHistoryChart } from "./charts/healthHistoryChart"
+import { HealthscoreBarChart } from "./charts/healthScoreChart"
 
-export { CardsList, Chart }
+export { CardsList, HealthStatusChart, HealthHistoryChart, HealthscoreBarChart }
