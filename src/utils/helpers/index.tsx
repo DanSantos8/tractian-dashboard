@@ -8,6 +8,10 @@ export function createSlug(title: string) {
   return title.toLowerCase().split(" ").join("-")
 }
 
+export function asPathToSlug(asPath: string) {
+  return asPath.split("=").at(-1)
+}
+
 export function getSubTabs(pathname: string) {
   switch (getSlug(pathname)) {
     case "reports":

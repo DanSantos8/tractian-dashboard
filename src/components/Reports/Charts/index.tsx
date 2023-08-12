@@ -1,3 +1,5 @@
-import { HealthHistoryChart } from "./healthHistoryChart"
+import { HealthHistoryChart } from "./HealthHistoryChart"
+import { HealthscoreBarChart } from "./HealthScoreChart"
+import { HealthStatusChart } from "./HealthStatusChart"
 
-export { HealthHistoryChart }
+export { HealthHistoryChart, HealthscoreBarChart, HealthStatusChart }

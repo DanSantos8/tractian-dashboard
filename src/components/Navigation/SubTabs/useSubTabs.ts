@@ -1,16 +1,16 @@
-import { createSlug, getSubTabs } from "@/utils/helpers"
+import { asPathToSlug, createSlug, getSubTabs } from "@/utils/helpers"
 import { useRouter } from "next/router"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 export default function useSubTabs() {
-  const { pathname, push, query } = useRouter()
-  const [currentSubTab, setCurrentSubTab] = useState<number>(0)
+  const { pathname, push, query, asPath } = useRouter()
 
-  const isSubTabActive = !!query.subtab
+  const [currentSubTab, setCurrentSubTab] = useState<number>(0)
 
   const subTabsValues = useMemo(() => {
     return getSubTabs(pathname)
   }, [pathname])
+  const isSubTabActive = !!query.subtab
 
   const handleChangeSubTab = useCallback(
     (currentSubTab: string, index: number) => {
@@ -22,10 +22,23 @@ export default function useSubTabs() {
   )
 
   useEffect(() => {
+    const subTabIndex = subTabsValues.findIndex(
+      (subtab) => subtab.slug === asPathToSlug(asPath)
+    )
+    console.log("re-render")
+
+    if (subTabIndex > 0) {
+      handleChangeSubTab(
+        createSlug(asPathToSlug(asPath) as string),
+        subTabIndex
+      )
+    }
+
     if (!!subTabsValues.length && !isSubTabActive) {
       handleChangeSubTab(createSlug(subTabsValues[0].slug), 0)
     }
-  }, [handleChangeSubTab, isSubTabActive, subTabsValues])
+  }, [asPath, handleChangeSubTab, isSubTabActive, subTabsValues])
+
   return {
     subTabsValues,
     handleChangeSubTab,

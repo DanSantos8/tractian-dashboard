@@ -2,6 +2,8 @@ import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import { assets } from "@/mock/datas"
+import { useReportsContext } from "@/context/reports/ReportsContext"
+import useHealthHistoryChart from "./useHealthHistoryChart"
 
 interface Asset {
   name: string

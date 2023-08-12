@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useContext } from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import { assets } from "@/mock/datas"
+import { useReportsContext } from "@/context/reports/ReportsContext"
+import useHealthHistoryChart from "./useHealthHistoryChart"
 
 interface Asset {
   healthHistory: { status: string; timestamp: string }[]
@@ -10,6 +12,7 @@ interface Asset {
 
 export const HealthHistoryChart = () => {
   const data: Asset[] = assets
+  const { teste } = useHealthHistoryChart()
 
   const seriesData = data.map((asset) => {
     const series = asset.healthHistory.map((history) => {

@@ -1,3 +1,4 @@
+import { ReportsContextProvider } from "@/context/reports/ReportsContext"
 import { createSlug } from "@/utils/helpers"
 import { getCurrentSubTabContent } from "@/utils/helpers/reports.helpers"
 import { useRouter } from "next/router"
@@ -8,8 +9,10 @@ export default function BrowserReports() {
   const slug = query.subtab ?? ""
 
   return (
-    <div className="flex h-full flex-col mx-auto">
-      {getCurrentSubTabContent(createSlug(slug as string))}
-    </div>
+    <ReportsContextProvider>
+      <div className="flex h-full flex-col mx-auto">
+        {getCurrentSubTabContent(createSlug(slug as string))}
+      </div>
+    </ReportsContextProvider>
   )
 }
