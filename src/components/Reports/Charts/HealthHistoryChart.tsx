@@ -2,8 +2,7 @@ import React, { useContext } from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
 import { assets } from "@/mock/datas"
-import { useReportsContext } from "@/context/reports/ReportsContext"
-import useHealthHistoryChart from "./useHealthHistoryChart"
+import { useChartsContext } from "@/context/charts/ChartsContext"
 
 interface Asset {
   healthHistory: { status: string; timestamp: string }[]
@@ -12,7 +11,7 @@ interface Asset {
 
 export const HealthHistoryChart = () => {
   const data: Asset[] = assets
-  const { teste } = useHealthHistoryChart()
+  const { styles } = useChartsContext()
 
   const seriesData = data.map((asset) => {
     const series = asset.healthHistory.map((history) => {
@@ -27,6 +26,7 @@ export const HealthHistoryChart = () => {
   const options: Highcharts.Options = {
     chart: {
       type: "line",
+      ...styles.chart,
     },
     title: {
       text: "Operation History during the Time",
@@ -36,14 +36,20 @@ export const HealthHistoryChart = () => {
       title: {
         text: "Time line",
       },
+      labels: {
+        ...styles.labels,
+      },
+      ...styles.gridLines,
     },
     yAxis: {
+      ...styles.gridLines,
       title: {
         text: "Operation status",
       },
       min: 0,
       max: 1,
       labels: {
+        ...styles.labels,
         formatter: function () {
           switch (this.value) {
             case 1:
