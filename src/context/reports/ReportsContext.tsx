@@ -9,7 +9,7 @@ const ReportsContext = createContext<ReportsContextProps>(undefined!)
 export const ReportsContextProvider = ({
   children,
 }: {
-  children: JSX.Element
+  children: React.ReactNode
 }) => {
   return (
     <ReportsContext.Provider value={{ teste: [] }}>

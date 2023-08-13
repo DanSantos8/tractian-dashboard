@@ -2,10 +2,11 @@ import { Card } from "antd"
 import { SubTabs } from "../SubTabs/SubTabs"
 import Link from "next/link"
 import useTabs, { TabsEnum } from "./useTabs"
+import useSubTabs from "../SubTabs/useSubTabs"
 
 export const Tabs = () => {
   const { tabs, setCurrentTab, currentTab } = useTabs()
-
+  const { setCurrentSubTab } = useSubTabs()
   return (
     <nav className="flex flex-col gap-3 mx-auto">
       <div className="flex gap-3 mx-auto">
@@ -13,7 +14,10 @@ export const Tabs = () => {
           <Link
             key={tab.title}
             href={tab.link}
-            onClick={() => setCurrentTab(i + 1)}
+            onClick={() => {
+              setCurrentSubTab(0)
+              setCurrentTab(i + 1)
+            }}
           >
             <Card
               className={`${
