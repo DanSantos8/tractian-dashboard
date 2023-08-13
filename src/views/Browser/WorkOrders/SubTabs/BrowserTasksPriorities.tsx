@@ -3,7 +3,7 @@ import { TasksPrioritiesChart } from "@/components/WorkOrders/Charts/TasksPriori
 export default function BrowserTasksPriorities() {
   return (
     <>
-      <div className="mt-auto">
+      <div className="mt-auto h-full">
         <TasksPrioritiesChart />
       </div>
     </>

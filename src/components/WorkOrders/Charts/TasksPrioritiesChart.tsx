@@ -31,7 +31,6 @@ export const TasksPrioritiesChart: React.FC = () => {
     chart: {
       type: "pie",
       ...styles.chart,
-      height: "550px",
     },
     title: {
       text: "Prioridades das Tarefas",

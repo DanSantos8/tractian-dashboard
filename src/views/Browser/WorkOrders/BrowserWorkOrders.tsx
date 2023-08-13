@@ -7,7 +7,7 @@ export default function BrowserWorkOrders() {
   const slug = query.subtab ?? ""
 
   return (
-    <div className="flex h-full flex-col mx-auto">
+    <div className="flex h-full gap-3 flex-col mx-auto ">
       {getWorkOrderCurrentSubTabContent(createSlug(slug as string))}
     </div>
   )
