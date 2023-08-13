@@ -25,12 +25,6 @@ export default function useSubTabs() {
   )
 
   useEffect(() => {
-    if (!!subTabsValues.length && !isSubTabActive) {
-      handleChangeSubTab(createSlug(subTabsValues[0].slug), 0)
-    }
-  }, [asPath, handleChangeSubTab, isSubTabActive, subTabsValues])
-
-  useEffect(() => {
     const subTabIndex = subTabsValues.findIndex(
       (subtab) => subtab.slug === asPathToSlug(asPath)
     )
@@ -41,7 +35,11 @@ export default function useSubTabs() {
         subTabIndex
       )
     }
-  }, [asPath, handleChangeSubTab, subTabsValues])
+
+    if (!!subTabsValues.length && !isSubTabActive) {
+      handleChangeSubTab(createSlug(subTabsValues[0].slug), 0)
+    }
+  }, [asPath, handleChangeSubTab, isSubTabActive, subTabsValues])
 
   return {
     subTabsValues,

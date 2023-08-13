@@ -1,7 +1,7 @@
 import { BrowserHealthHistory } from "@/views/Browser/Reports/SubTabs/BrowserHealthHistory"
 import BrowserHelthScore from "@/views/Browser/Reports/SubTabs/BrowserHealthScore"
 import BrowserHealthStatus from "@/views/Browser/Reports/SubTabs/BrowserHealthStatus"
-
+import * as BrowserWorkOrdersSubTabs from "@/views/Browser/WorkOrders/SubTabs"
 enum WorkOrdersSubTabsEnum {
   tasks_status = "Tasks status",
   tasks_status_slug = "tasks-status",
@@ -29,22 +29,15 @@ export const workOrdersSubTabs = [
     title: WorkOrdersSubTabsEnum.tasks_checklist,
     slug: WorkOrdersSubTabsEnum.tasks_checklist_slug,
   },
-  {
-    id: 3,
-    title: WorkOrdersSubTabsEnum.tasks_assets_status,
-    slug: WorkOrdersSubTabsEnum.tasks_assets_status_slug,
-  },
 ]
 
-export function getCurrentSubTabContent(slug: string) {
+export function getWorkOrderCurrentSubTabContent(slug: string) {
   switch (slug) {
     case WorkOrdersSubTabsEnum.tasks_status_slug:
-      return <BrowserHealthHistory />
+      return <BrowserWorkOrdersSubTabs.BrowserTasksStatus />
     case WorkOrdersSubTabsEnum.tasks_priorities_slug:
-      return <BrowserHealthStatus />
+      return <BrowserWorkOrdersSubTabs.BrowserTasksPriorities />
     case WorkOrdersSubTabsEnum.tasks_checklist_slug:
-      return <BrowserHelthScore />
-    case WorkOrdersSubTabsEnum.tasks_assets_status_slug:
-      return <BrowserHelthScore />
+      return <BrowserWorkOrdersSubTabs.BrowserChecklistProgress />
   }
 }

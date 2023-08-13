@@ -1,3 +1,5 @@
+import BrowserWorkOrders from "@/views/Browser/WorkOrders/BrowserWorkOrders"
+
 export default function WorkOrders() {
-  return <div>Hello work orders</div>
+  return <BrowserWorkOrders />
 }
