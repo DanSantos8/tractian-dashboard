@@ -1,8 +1,8 @@
-import { useClientsContext } from "@/context/clients/ClientsContext"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 import useTable from "@/hooks/useTable"
 
 export function BrowserUnits() {
-  const context = useClientsContext()
+  const context = useGlobalContext()
 
   const { state } = context!
 

@@ -1,13 +1,15 @@
-import { useClientsContext } from "@/context/clients/ClientsContext"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 import { createSlug } from "@/utils/helpers"
 import { getClientsCurrentSubTabContent } from "@/utils/helpers/clients.helpers"
 import { useRouter } from "next/router"
 
 export default function BrowserClients() {
   const { query } = useRouter()
-  const context = useClientsContext()
+  const context = useGlobalContext()
 
   const { state } = context!
+
+  console.log(state)
 
   const slug = query.subtab ?? ""
 

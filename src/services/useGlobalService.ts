@@ -1,9 +1,15 @@
 import { useCallback } from "react"
-import { Company, Unit } from "@/context/clients/ClientsContext"
-import { companiesRequest, unitsRequest } from "@/utils/requests"
+import {
+  assetsRequest,
+  companiesRequest,
+  unitsRequest,
+  usersRequest,
+  workOrdersRequest,
+} from "@/utils/requests"
 import { useState } from "react"
+import { Company, Unit } from "@/utils/types"
 
-export function useClientsService() {
+export function useGlobalService() {
   const [isLoading, setIsLoading] = useState(true)
 
   const fetchCompanies = async () => {
@@ -29,8 +35,14 @@ export function useClientsService() {
     }
   }
 
-  const fetchClients = useCallback((): Promise<(Company[] | Unit[])[]> => {
-    return Promise.all([unitsRequest(), companiesRequest()])
+  const fetchData = useCallback(async () => {
+    return Promise.all([
+      unitsRequest(),
+      companiesRequest(),
+      usersRequest(),
+      workOrdersRequest(),
+      assetsRequest(),
+    ])
       .then((responses) =>
         Promise.all(responses.map((response) => response.data))
       )
@@ -47,7 +59,7 @@ export function useClientsService() {
     callbacks: {
       fetchCompanies,
       fetchUnits,
-      fetchClients,
+      fetchData,
     },
   }
 }
