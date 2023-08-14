@@ -1,3 +1,4 @@
+import { clientsSubTabs } from "./clients.helpers"
 import { reportsSubTabs } from "./reports.helpers"
 import { workOrdersSubTabs } from "./work-orders.helpers"
 
@@ -25,8 +26,8 @@ export function getSubTabs(pathname: string) {
       return workOrdersSubTabs
     case "users":
       return []
-    case "companies-units":
-      return []
+    case "clients":
+      return clientsSubTabs
     default:
       return []
   }

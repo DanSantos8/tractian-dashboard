@@ -7,6 +7,7 @@ import useSubTabs from "../SubTabs/useSubTabs"
 export const Tabs = () => {
   const { tabs, setCurrentTab, currentTab } = useTabs()
   const { setCurrentSubTab } = useSubTabs()
+
   return (
     <nav className="flex flex-col gap-3 mx-auto">
       <div className="flex gap-3 mx-auto">

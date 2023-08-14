@@ -7,7 +7,7 @@ export enum TabsEnum {
   reports = 1,
   work_orders = 2,
   users = 3,
-  companies_units = 4,
+  clients = 4,
 }
 
 export default function useTabs() {
@@ -42,7 +42,7 @@ export default function useTabs() {
     },
 
     {
-      link: "companies-units",
+      link: "clients",
       title: "Companies and Units",
       description: "Manage your clients",
     },

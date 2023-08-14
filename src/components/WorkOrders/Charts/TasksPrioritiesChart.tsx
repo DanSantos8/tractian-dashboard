@@ -22,7 +22,7 @@ const getPriorityCounts = (data: WorkOrder[]) => {
   return priorityCounts
 }
 
-export const TasksPrioritiesChart: React.FC = () => {
+export const TasksPrioritiesChart = () => {
   const { styles } = useChartsContext()
 
   const priorityCounts = getPriorityCounts(workorders)
