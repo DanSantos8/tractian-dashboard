@@ -31,7 +31,7 @@ export function WorkOrdersList() {
             title={workOrder.title}
             key={workOrder.id}
             size="small"
-            className="flex-1 min-w-min cursor-pointer"
+            className="flex-1 min-w-min cursor-pointer hover:bg-gray-light-1"
             onClick={() => handleUpdateWorkOrder(workOrder)}
           >
             <span>{workOrder.description}</span>

@@ -1,7 +1,7 @@
 import { useGlobalContext } from "@/context/global/GlobalContext"
 import HighchartsReact from "highcharts-react-official"
 import Highcharts from "highcharts"
-import { Card, Col, Row } from "antd"
+import { Card } from "antd"
 import useHome from "./useHome"
 
 export default function Home() {
