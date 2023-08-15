@@ -4,12 +4,23 @@
 
 body {
   @apply bg-gray-light;
-}
-
-[data-highcharts-chart] {
-  height: 100%;
+  scrollbar-width: none; /* Hide scrollbar */
 }
 
 .ant-form-inline .ant-form-item {
   margin-bottom: 8px;
+}
+
+/* Hide scrollbar for Webkit browsers */
+::-webkit-scrollbar {
+  width: 0.5em;
+  display: none; /* Hide scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Hide thumb */
+}
+
+/* Hide scrollbar for Firefox */
+body {
 }

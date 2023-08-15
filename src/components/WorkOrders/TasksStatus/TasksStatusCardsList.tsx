@@ -11,7 +11,7 @@ export function TasksStatusCardsList() {
   const { getPendingTasks, colors } = useCardsList()
 
   return (
-    <div className="flex  gap-3 mb-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {workOrders.map((workorder) => (
         <Card key={workorder.id} className="flex-1">
           <div className="flex flex-col gap-3">

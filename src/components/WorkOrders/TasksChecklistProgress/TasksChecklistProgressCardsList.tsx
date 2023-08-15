@@ -7,10 +7,10 @@ export function TasksChecklistProgressCardsList() {
     state: { workOrders },
   } = context!
   return (
-    <div className="flex gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
       {workOrders.map((workorder) => {
         return (
-          <Card key={workorder.id} className="flex-1">
+          <Card key={workorder.id}>
             <h4 className="font-semibold mb-3">{workorder.title}</h4>
 
             <ul>

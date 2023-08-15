@@ -7,8 +7,8 @@ enum WorkOrdersSubTabsEnum {
   tasks_status_slug = "tasks-status",
   tasks_priorities = "Tasks priorities",
   tasks_priorities_slug = "tasks-priorities",
-  tasks_checklist = "Checklist progress",
-  tasks_checklist_slug = "checklist-progress",
+  tasks_checklist = "Tasks checklist",
+  tasks_checklist_slug = "tasks-checklist",
   tasks_assets_status = "Assets status",
   tasks_assets_status_slug = "assets-status",
   work_orders_management = "Work Orders Management",
@@ -18,8 +18,8 @@ enum WorkOrdersSubTabsEnum {
 export const workOrdersSubTabs = [
   {
     id: 0,
-    title: WorkOrdersSubTabsEnum.tasks_status,
-    slug: WorkOrdersSubTabsEnum.tasks_status_slug,
+    title: WorkOrdersSubTabsEnum.work_orders_management,
+    slug: WorkOrdersSubTabsEnum.work_orders_management_slug,
   },
   {
     id: 1,
@@ -33,8 +33,8 @@ export const workOrdersSubTabs = [
   },
   {
     id: 3,
-    title: WorkOrdersSubTabsEnum.work_orders_management,
-    slug: WorkOrdersSubTabsEnum.work_orders_management_slug,
+    title: WorkOrdersSubTabsEnum.tasks_status,
+    slug: WorkOrdersSubTabsEnum.tasks_status_slug,
   },
 ]
 

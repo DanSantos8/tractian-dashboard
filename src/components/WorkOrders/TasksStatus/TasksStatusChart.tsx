@@ -1,7 +1,6 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { useChartsContext } from "@/context/charts/ChartsContext"
 import useTasksStatusChart from "./useTasksStatusChart"
 import { useGlobalContext } from "@/context/global/GlobalContext"
 
@@ -10,40 +9,57 @@ export const TaskStatusChart = () => {
   const {
     state: { workOrders },
   } = context!
-  const { styles } = useChartsContext()
   const { getStatusCounts } = useTasksStatusChart()
   const statusCounts = getStatusCounts(workOrders)
 
   const options: Highcharts.Options = {
     chart: {
       type: "bar",
-      ...styles.chart,
+      backgroundColor: "#f5f5f5",
+      borderRadius: 8,
+      height: 500,
+      spacing: [30, 10, 30, 10], // Reduce spacing around the chart
     },
     title: {
-      text: "Status das Tarefas",
+      text: "Work Order Progress",
+      style: {
+        color: "#333",
+        fontSize: "24px",
+        fontWeight: "bold",
+      },
     },
     xAxis: {
-      categories: ["Pendente", "Em Progresso", "Concluído"],
-      ...styles.gridLines,
+      categories: ["Pending", "In Progress", "Completed"],
       labels: {
-        ...styles.labels,
+        style: {
+          color: "#555",
+          fontSize: "14px",
+        },
+      },
+      title: {
+        text: "",
+        style: {
+          color: "#555",
+          fontSize: "16px",
+        },
       },
     },
     yAxis: {
-      ...styles.gridLines,
       title: {
-        text: "Número de Tarefas",
-        margin: 24,
+        text: "",
       },
       tickInterval: 1,
       labels: {
-        ...styles.labels,
+        style: {
+          color: "#555",
+          fontSize: "14px",
+        },
       },
     },
     series: [
       {
         type: "bar",
-        name: "Tarefas",
+        name: "Work Orders",
         colorByPoint: true,
         showInLegend: false,
         data: [
@@ -51,8 +67,22 @@ export const TaskStatusChart = () => {
           { y: statusCounts.inProgress, color: "#007AFF" },
           { y: statusCounts.completed, color: "#07BC0C" },
         ],
+        dataLabels: {
+          enabled: true,
+          format: "{y}",
+          style: {
+            color: "#444",
+            fontSize: "14px",
+          },
+        },
       },
     ],
+    credits: {
+      enabled: false,
+    },
+    legend: {
+      enabled: false, // Remove legend
+    },
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />

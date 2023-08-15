@@ -2,11 +2,7 @@ import React from "react"
 import { Button, Popconfirm, Space, Table } from "antd"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
 
-interface Props {
-  dataSource: any[]
-}
-
-export default function useTable(props?: Props) {
+export default function useTable() {
   const renderTable = (dataSource: any[] = []) => {
     const getDynamicColumns = () => {
       if (!dataSource.length) {
@@ -25,23 +21,17 @@ export default function useTable(props?: Props) {
       }))
     }
 
-    const columns = [
-      ...getDynamicColumns(),
-      {
-        key: "actions",
-        width: 100,
-        render: () => (
-          <Space>
-            {/*  <Button style={{ width: 50 }} icon={<EditOutlined />} /> */}
-            <Popconfirm title="Are you sure you want to delete this item?">
-              <Button style={{ width: 50 }} icon={<DeleteOutlined />} danger />
-            </Popconfirm>
-          </Space>
-        ),
-      },
-    ]
+    const columns = [...getDynamicColumns()]
 
-    return <Table dataSource={dataSource} columns={columns} />
+    return (
+      <div className=" overflow-x-auto w-full">
+        <Table
+          dataSource={dataSource}
+          columns={columns}
+          className="min-w-[1024px]"
+        />
+      </div>
+    )
   }
 
   return { renderTable }

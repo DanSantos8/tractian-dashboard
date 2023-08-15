@@ -16,11 +16,6 @@ enum ReportsSubTabsSlugEnum {
 
 export const reportsSubTabs = [
   {
-    id: 0,
-    title: ReportsSubTabsEnum.health_history,
-    slug: ReportsSubTabsSlugEnum.health_history,
-  },
-  {
     id: 1,
     title: ReportsSubTabsEnum.health_score,
     slug: ReportsSubTabsSlugEnum.health_score,
@@ -29,6 +24,11 @@ export const reportsSubTabs = [
     id: 2,
     title: ReportsSubTabsEnum.health_status,
     slug: ReportsSubTabsSlugEnum.health_status,
+  },
+  {
+    id: 0,
+    title: ReportsSubTabsEnum.health_history,
+    slug: ReportsSubTabsSlugEnum.health_history,
   },
 ]
 

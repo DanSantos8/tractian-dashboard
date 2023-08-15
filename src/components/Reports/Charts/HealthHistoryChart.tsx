@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { useChartsContext } from "@/context/charts/ChartsContext"
 import { useGlobalContext } from "@/context/global/GlobalContext"
 
 interface Asset {
@@ -14,7 +13,6 @@ export const HealthHistoryChart = () => {
   const {
     state: { assets },
   } = context!
-  const { styles } = useChartsContext()
 
   const seriesData = assets.map((asset) => {
     const series = asset.healthHistory.map((history) => {
@@ -29,39 +27,54 @@ export const HealthHistoryChart = () => {
   const options: Highcharts.Options = {
     chart: {
       type: "line",
-      ...styles.chart,
+      backgroundColor: "#f5f5f5",
+      borderRadius: 8,
+      height: 500,
     },
     title: {
       text: "Operation History during the Time",
+      style: {
+        color: "#333",
+        fontSize: "20px",
+        fontWeight: "bold",
+      },
     },
     xAxis: {
       type: "datetime",
       title: {
-        text: "Time line",
+        text: "Time Line",
+        style: {
+          color: "#555",
+          fontSize: "16px",
+        },
       },
       labels: {
-        ...styles.labels,
+        style: {
+          color: "#555",
+          fontSize: "14px",
+        },
       },
-      ...styles.gridLines,
     },
     yAxis: {
-      ...styles.gridLines,
       title: {
-        text: "Operation status",
+        text: "",
       },
-      min: 0,
-      max: 1,
+      min: -0.1,
+      max: 1.1,
       labels: {
-        ...styles.labels,
         formatter: function () {
           switch (this.value) {
             case 1:
-              return "In operation"
+              return "In Operation"
             case 0:
-              return "In downtime"
+              return "In Downtime"
             default:
               return ""
           }
+        },
+        style: {
+          color: "#555",
+          fontSize: "14px",
         },
       },
     },
@@ -73,6 +86,12 @@ export const HealthHistoryChart = () => {
       },
     },
     series: seriesData as Highcharts.SeriesOptionsType[],
+    legend: {
+      enabled: false,
+    },
+    credits: {
+      enabled: false,
+    },
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />

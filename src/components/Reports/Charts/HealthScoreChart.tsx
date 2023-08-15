@@ -1,8 +1,6 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { useReportsContext } from "@/context/reports/ReportsContext"
-import useHealthHistoryChart from "./useHealthHistoryChart"
 import { useGlobalContext } from "@/context/global/GlobalContext"
 
 interface Asset {
@@ -22,19 +20,47 @@ export const HealthscoreBarChart = () => {
   const options: Highcharts.Options = {
     chart: {
       type: "bar",
+      backgroundColor: "#f5f5f5",
+      borderRadius: 8,
+      height: 500,
     },
     title: {
       text: "Assets Healthscore",
+      style: {
+        color: "#333",
+        fontSize: "20px", // Slightly larger title font size
+        fontWeight: "bold",
+      },
     },
     xAxis: {
       categories: categories,
       title: {
         text: "Assets",
+        style: {
+          color: "#555",
+          fontSize: "10px", // Slightly larger X-axis title font size
+        },
+      },
+      labels: {
+        style: {
+          color: "#555",
+          fontSize: "12px",
+        },
       },
     },
     yAxis: {
       title: {
         text: "Healthscore",
+        style: {
+          color: "#555",
+          fontSize: "12px", // Slightly larger Y-axis title font size
+        },
+      },
+      labels: {
+        style: {
+          color: "#555",
+          fontSize: "10px",
+        },
       },
     },
     series: [
@@ -42,8 +68,20 @@ export const HealthscoreBarChart = () => {
         type: "column",
         name: "Healthscore",
         data: healthscores,
+        color: "#3498DB", // Single color for all columns
+        dataLabels: {
+          enabled: true,
+          format: "{y}", // Show the exact value on top of each column
+          style: {
+            color: "#444",
+            fontSize: "12px",
+          },
+        },
       },
     ],
+    credits: {
+      enabled: false,
+    },
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />

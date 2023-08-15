@@ -1,44 +1,83 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { useChartsContext } from "@/context/charts/ChartsContext"
 import useTasksChecklistProgressChart from "./useTasksChecklistProgressChart"
-import { useGlobalContext } from "@/context/global/GlobalContext"
 
 export const TasksChecklistProgressChart = () => {
-  const { styles } = useChartsContext()
   const { seriesData } = useTasksChecklistProgressChart()
 
   const options: Highcharts.Options = {
     chart: {
       type: "column",
-      ...styles.chart,
+      backgroundColor: "#f5f5f5",
+      borderRadius: 8,
+      height: 500,
     },
     title: {
-      text: "Checklist progress",
+      text: "Tasks Checklist",
+      style: {
+        color: "#333",
+        fontSize: "20px",
+        fontWeight: "bold",
+      },
     },
     xAxis: {
-      labels: {
-        ...styles.labels,
-      },
       categories: ["Concluído", "Não Concluído"],
-      ...styles.gridLines,
-    },
-    yAxis: {
       labels: {
-        ...styles.labels,
+        style: {
+          color: "#555",
+          fontSize: "14px",
+        },
       },
       title: {
-        text: "Items quantity",
+        text: "",
+        style: {
+          color: "#555",
+          fontSize: "16px",
+        },
       },
-      ...styles.gridLines,
+    },
+    yAxis: {
+      title: {
+        text: "",
+        style: {
+          color: "#555",
+          fontSize: "16px",
+        },
+      },
       tickInterval: 1,
+      labels: {
+        style: {
+          color: "#555",
+          fontSize: "14px",
+        },
+      },
     },
     series: seriesData.map((serie) => ({
       type: "column",
       name: serie.name,
       data: serie.data,
+      dataLabels: {
+        enabled: true,
+        format: "{y}",
+        style: {
+          color: "#444",
+          fontSize: "14px",
+        },
+      },
     })),
+    credits: {
+      enabled: false,
+    },
+    legend: {
+      enabled: true,
+      align: "center",
+      verticalAlign: "bottom",
+      itemStyle: {
+        color: "#555",
+        fontSize: "14px",
+      },
+    },
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />

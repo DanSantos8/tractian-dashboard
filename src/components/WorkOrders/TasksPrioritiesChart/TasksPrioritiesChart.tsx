@@ -1,7 +1,6 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { useChartsContext } from "@/context/charts/ChartsContext"
 import { useGlobalContext } from "@/context/global/GlobalContext"
 
 interface WorkOrder {
@@ -27,14 +26,13 @@ export const TasksPrioritiesChart = () => {
   const {
     state: { workOrders },
   } = context!
-  const { styles } = useChartsContext()
 
   const priorityCounts = getPriorityCounts(workOrders)
 
   const options: Highcharts.Options = {
     chart: {
       type: "pie",
-      ...styles.chart,
+      height: 500,
     },
     title: {
       text: "Prioridades das Tarefas",
