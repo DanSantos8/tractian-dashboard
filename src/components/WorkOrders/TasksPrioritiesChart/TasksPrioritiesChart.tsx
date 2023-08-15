@@ -33,20 +33,60 @@ export const TasksPrioritiesChart = () => {
     chart: {
       type: "pie",
       height: 500,
+      backgroundColor: "transparent",
+      borderRadius: 10,
+      spacing: [0, 0, 0, 0],
     },
     title: {
-      text: "Prioridades das Tarefas",
+      text: "Task Priorities Overview",
+      align: "center",
+      style: {
+        fontFamily: "Copperplate, sans-serif",
+        fontWeight: "bold",
+        fontSize: "32px",
+        color: "#2c3e50",
+      },
     },
     series: [
       {
         type: "pie",
-        name: "Prioridades",
+        name: "Priority Distribution",
         data: Object.entries(priorityCounts).map(([priority, count]) => ({
           name: priority,
           y: count,
         })),
+        borderWidth: 5,
+        borderColor: "white",
       },
     ],
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: "pointer",
+        colors: ["#3498db", "#e74c3c", "#2ecc71", "#f39c12"],
+        dataLabels: {
+          enabled: true,
+          format: "<b>{point.name}</b>: {point.percentage:.1f}%",
+          distance: -20,
+          style: {
+            fontFamily: "Copperplate, sans-serif",
+            fontSize: "18px",
+            color: "#34495e",
+          },
+        },
+        showInLegend: true,
+      },
+    },
+    legend: {
+      layout: "vertical",
+      align: "right",
+      verticalAlign: "middle",
+      itemStyle: {
+        fontFamily: "Copperplate, sans-serif",
+        fontSize: "20px",
+        color: "#7f8c8d",
+      },
+    },
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />

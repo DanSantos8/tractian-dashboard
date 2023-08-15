@@ -1,3 +1,5 @@
+import Home from "@/components/Home"
+
 export default function BrowserHome() {
-  return <div>Hello</div>
+  return <Home />
 }

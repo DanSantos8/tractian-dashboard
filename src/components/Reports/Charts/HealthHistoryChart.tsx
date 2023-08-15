@@ -94,5 +94,11 @@ export const HealthHistoryChart = () => {
     },
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />
+  return (
+    <div className="w-full overflow-x-auto">
+      <div className="min-w-[768px]">
+        <HighchartsReact highcharts={Highcharts} options={options} />
+      </div>
+    </div>
+  )
 }

@@ -27,7 +27,7 @@ export default function useTabs() {
   const tabs = [
     {
       link: "reports",
-      title: "Reports",
+      title: "Assets",
       description: "Check the assets informations",
     },
     {

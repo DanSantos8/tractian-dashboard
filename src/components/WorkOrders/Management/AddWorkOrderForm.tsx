@@ -11,15 +11,8 @@ export function AddWorkOrderForm() {
     state: { assets, users },
   } = context!
 
-  const {
-    onSubmit,
-    renderErrorMessage,
-    isLoading,
-    handleSubmit,
-    errors,
-    control,
-    getValues,
-  } = useAddWorkOrderForm()
+  const { onSubmit, isLoading, handleSubmit, control, getValues } =
+    useAddWorkOrderForm()
 
   return (
     <Modal
@@ -38,18 +31,14 @@ export function AddWorkOrderForm() {
             name="title"
             control={control}
             render={({ field }) => <Input {...field} />}
-            rules={{ required: "Title is required" }}
           />
-          {errors.title && renderErrorMessage(errors.title)}
         </Form.Item>
         <Form.Item label="Description" name="description">
           <Controller
             name="description"
             control={control}
             render={({ field }) => <Input {...field} />}
-            rules={{ required: "Description is required" }}
           />
-          {errors.description && renderErrorMessage(errors.description)}
         </Form.Item>
         <Row gutter={16}>
           <Col span={12}>
@@ -57,7 +46,6 @@ export function AddWorkOrderForm() {
               <Controller
                 name="asset"
                 control={control}
-                rules={{ required: "Asset is required" }}
                 render={({ field }) => (
                   <Select {...field}>
                     {assets?.map((asset) => (
@@ -68,7 +56,6 @@ export function AddWorkOrderForm() {
                   </Select>
                 )}
               />
-              {errors.asset && renderErrorMessage(errors.asset)}
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -76,7 +63,6 @@ export function AddWorkOrderForm() {
               <Controller
                 name="users"
                 control={control}
-                rules={{ required: "Users is required" }}
                 render={({ field }) => (
                   <Select mode="multiple" {...field}>
                     {users.map((user) => (
@@ -87,7 +73,6 @@ export function AddWorkOrderForm() {
                   </Select>
                 )}
               />
-              {errors.users && renderErrorMessage(errors.users)}
             </Form.Item>
           </Col>
         </Row>
@@ -98,7 +83,6 @@ export function AddWorkOrderForm() {
               <Controller
                 name="priority"
                 control={control}
-                rules={{ required: "Priority is required" }}
                 render={({ field }) => (
                   <Select {...field}>
                     <Select.Option value="high">High</Select.Option>
@@ -107,7 +91,6 @@ export function AddWorkOrderForm() {
                   </Select>
                 )}
               />
-              {errors.priority && renderErrorMessage(errors.priority)}
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -115,7 +98,6 @@ export function AddWorkOrderForm() {
               <Controller
                 name="status"
                 control={control}
-                rules={{ required: "Status is required" }}
                 render={({ field }) => (
                   <Select {...field}>
                     <Select.Option value="pending">Pending</Select.Option>
@@ -126,7 +108,6 @@ export function AddWorkOrderForm() {
                   </Select>
                 )}
               />
-              {errors.status && renderErrorMessage(errors.status)}
             </Form.Item>
           </Col>
         </Row>
@@ -134,46 +115,32 @@ export function AddWorkOrderForm() {
           <h3 className="font-semibold">Checklist</h3>
 
           {["step-1", "step-2", "step-3"].map((item, index) => (
-            <Row gutter={16} key={item}>
-              <Col span={16}>
-                <Form.Item
-                  className="mb-0"
+            <div key={item} className="flex gap-2">
+              <Form.Item className="mb-0 w-full" name={item}>
+                <Controller
                   name={item}
-                  validateStatus={errors[item] ? "error" : ""}
-                >
-                  <Controller
-                    name={item}
-                    control={control}
-                    render={({ field }) => (
-                      <Input {...field} placeholder={`Step ${index + 1}`} />
-                    )}
-                    rules={{ required: "Task is required" }}
-                  />
-                  {errors[item] && renderErrorMessage(errors[item])}
-                </Form.Item>
-              </Col>
+                  control={control}
+                  render={({ field }) => (
+                    <Input {...field} placeholder={`Step ${index + 1}`} />
+                  )}
+                />
+              </Form.Item>
 
-              <Col span={1}>
-                <Form.Item
-                  className="mb-0"
+              <Form.Item className="mb-0" name={`${item}-check`}>
+                <Controller
                   name={`${item}-check`}
-                  validateStatus={errors[item] ? "error" : ""}
-                >
-                  <Controller
-                    name={`${item}-check`}
-                    control={control}
-                    render={({ field }) => {
-                      return (
-                        <Checkbox
-                          {...field}
-                          checked={getValues(`${item}-check`)}
-                        />
-                      )
-                    }}
-                  />
-                </Form.Item>
-              </Col>
-            </Row>
+                  control={control}
+                  render={({ field }) => {
+                    return (
+                      <Checkbox
+                        {...field}
+                        checked={getValues(`${item}-check`)}
+                      />
+                    )
+                  }}
+                />
+              </Form.Item>
+            </div>
           ))}
         </div>
 

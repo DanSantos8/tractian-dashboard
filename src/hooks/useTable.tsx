@@ -1,6 +1,5 @@
 import React from "react"
-import { Button, Popconfirm, Space, Table } from "antd"
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
+import { Table } from "antd"
 
 export default function useTable() {
   const renderTable = (dataSource: any[] = []) => {
@@ -25,11 +24,9 @@ export default function useTable() {
 
     return (
       <div className=" overflow-x-auto w-full">
-        <Table
-          dataSource={dataSource}
-          columns={columns}
-          className="min-w-[1024px]"
-        />
+        <div className="min-w-[700px]">
+          <Table dataSource={dataSource} columns={columns} />
+        </div>
       </div>
     )
   }

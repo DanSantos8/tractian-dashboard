@@ -41,8 +41,7 @@ export const HealthStatusChart = () => {
       style: {
         fontFamily: "Montserrat, sans-serif",
       },
-      spacing: [30, 10, 30, 10],
-      height: 500,
+      spacing: [10, 10, 10, 10], // Adjust spacing for responsiveness
     },
     title: {
       text: "Health Status Distribution",
@@ -77,7 +76,7 @@ export const HealthStatusChart = () => {
           style: {
             color: "#444",
             textOutline: "none",
-            fontSize: "14px",
+            fontSize: "14px", // Default font size
           },
         },
         borderWidth: 1,
@@ -87,7 +86,47 @@ export const HealthStatusChart = () => {
     credits: {
       enabled: false,
     },
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 768, // Adjust the maximum width as needed
+          },
+          chartOptions: {
+            title: {
+              style: {
+                fontSize: "20px", // Adjust title font size for responsiveness
+              },
+            },
+            legend: {
+              align: "center",
+              verticalAlign: "bottom",
+              layout: "horizontal",
+              itemStyle: {
+                fontSize: "12px", // Adjust legend item font size for responsiveness
+              },
+            },
+            series: [
+              {
+                type: "pie",
+                dataLabels: {
+                  style: {
+                    fontSize: "10px", // Adjust data label font size for responsiveness
+                  },
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />
+  return (
+    <div className="w-full overflow-x-auto">
+      <div className="min-w-[420px]">
+        <HighchartsReact highcharts={Highcharts} options={options} />
+      </div>
+    </div>
+  )
 }

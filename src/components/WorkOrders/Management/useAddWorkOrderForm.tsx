@@ -11,13 +11,7 @@ import "react-toastify/dist/ReactToastify.css"
 export default function useAddWorkOrderForm() {
   const context = useGlobalContext()
   const { currentWorkOrder, handleCancel } = useWorkOrdersContext()
-  const {
-    handleSubmit,
-    control,
-    setValue,
-    formState: { errors },
-    getValues,
-  } = useForm()
+  const { handleSubmit, control, setValue, getValues } = useForm()
 
   const { dispatch } = context!
 
@@ -30,18 +24,26 @@ export default function useAddWorkOrderForm() {
     currentWorkOrder
   const checklistSteps = useMemo(() => ["step-1", "step-2", "step-3"], [])
 
-  const defaultValues = {
-    title,
-    description,
-    asset: assetId,
-    users: rest.users,
-    priority,
-    status,
-    ...rest,
-  }
+  const defaultValues = useMemo(() => {
+    return {
+      title,
+      description,
+      asset: assetId,
+      users: rest.users,
+      priority,
+      status,
+      ...rest,
+    }
+  }, [assetId, description, priority, rest, status, title])
 
   const showToastMessage = (message: string) => {
     toast.success(message, {
+      position: toast.POSITION.TOP_RIGHT,
+    })
+  }
+
+  const showToastErrorMessage = (message: string) => {
+    toast(message, {
       position: toast.POSITION.TOP_RIGHT,
     })
   }
@@ -55,7 +57,7 @@ export default function useAddWorkOrderForm() {
         checklist: checklistSteps
           .map((item) => ({
             task: data[item],
-            completed: false,
+            completed: data[`${item}-check`],
           }))
           .filter((item) => item.task),
         id: generateRandomNumberID(),
@@ -106,6 +108,18 @@ export default function useAddWorkOrderForm() {
 
   const onSubmit = useCallback(
     async (data: any) => {
+      const excludedKeys = ["step-1-check", "step-2-check", "step-3-check"]
+
+      const isEmpty = Object.entries(data).some(([key, value]) => {
+        return !excludedKeys.includes(key) && !value
+      })
+
+      if (isEmpty) {
+        showToastErrorMessage("Please, fill all the fields.")
+
+        return
+      }
+
       const shouldUpdate = !!currentWorkOrder.id
 
       shouldUpdate ? handleUpdateWorkOrder(data) : handleAddWorkOrder(data)
@@ -119,10 +133,6 @@ export default function useAddWorkOrderForm() {
       handleCancel,
       handleUpdateWorkOrder,
     ]
-  )
-
-  const renderErrorMessage = (error: any) => (
-    <span style={{ color: "red", fontSize: "12px" }}>{error.message}</span>
   )
 
   useEffect(() => {
@@ -140,14 +150,12 @@ export default function useAddWorkOrderForm() {
   }, [defaultValues, setValue])
 
   return {
-    renderErrorMessage,
     onSubmit,
     isLoading,
     defaultValues,
     checklistSteps,
     control,
     handleSubmit,
-    errors,
     getValues,
   }
 }

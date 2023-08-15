@@ -13,18 +13,11 @@ export const UsersSubTabs = [
     title: UsersSubTabsEnum.users,
     slug: UsersSubTabsEnum.users_slug,
   },
-  {
-    id: 1,
-    title: UsersSubTabsEnum.assignments,
-    slug: UsersSubTabsEnum.assignments_slug,
-  },
 ]
 
 export function getUsersCurrentSubTabContent(slug: string) {
   switch (slug) {
     case UsersSubTabsEnum.users_slug:
       return <Users.BrowserUsersList />
-    case UsersSubTabsEnum.assignments_slug:
-      return <Users.BrowserAssignments />
   }
 }
