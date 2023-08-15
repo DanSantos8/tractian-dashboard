@@ -32,7 +32,7 @@ export const HealthHistoryChart = () => {
       height: 500,
     },
     title: {
-      text: "Operation History during the Time",
+      text: "Operation Time Line",
       style: {
         color: "#333",
         fontSize: "20px",
@@ -86,12 +86,6 @@ export const HealthHistoryChart = () => {
       },
     },
     series: seriesData as Highcharts.SeriesOptionsType[],
-    legend: {
-      enabled: false,
-    },
-    credits: {
-      enabled: false,
-    },
   }
 
   return (
