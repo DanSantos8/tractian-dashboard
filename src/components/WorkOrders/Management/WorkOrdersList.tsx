@@ -34,7 +34,7 @@ export function WorkOrdersList() {
             className="flex-1 min-w-min cursor-pointer hover:bg-gray-light-1"
             onClick={() => handleUpdateWorkOrder(workOrder)}
           >
-            <span>{workOrder.description}</span>
+            <span className="block h-10">{workOrder.description}</span>
 
             <div className="flex flex-col mt-auto">
               <div className="flex flex-col mt-3">
@@ -86,7 +86,9 @@ export function WorkOrdersList() {
                 <span className="font-semibold">Assigned Users: </span>
                 <ul className="flex flex-col">
                   {assignedUsersNames.map((user) => (
-                    <li key={user.value}>{user.label}</li>
+                    <li key={user.value} className="text-xs">
+                      {user.label}
+                    </li>
                   ))}
                 </ul>
               </div>
