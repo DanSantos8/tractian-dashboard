@@ -1,39 +1,29 @@
 import { useGlobalContext } from "@/context/global/GlobalContext"
-import { Modal, Input, Form, Select, Row, Col, Button } from "antd"
-import { useForm, Controller } from "react-hook-form"
-import { PlusCircleOutlined } from "@ant-design/icons"
+import { Modal, Input, Form, Select, Row, Col, Button, Checkbox } from "antd"
+import { Controller } from "react-hook-form"
 import useAddWorkOrderForm from "./useAddWorkOrderForm"
+import { useWorkOrdersContext } from "@/context/workOrders/workOrdersContext"
 
-interface Props {
-  showModal: boolean
-  handleOk: () => void
-  handleCancel: () => void
-}
-
-export function AddWorkOrderForm(props: Props) {
-  const { handleCancel, handleOk, showModal } = props
+export function AddWorkOrderForm() {
+  const { handleCancel, handleOk, isModalVisible } = useWorkOrdersContext()
   const context = useGlobalContext()
   const {
     state: { assets, users },
   } = context!
 
   const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm()
-
-  const {
-    checklistItems,
     onSubmit,
     renderErrorMessage,
-    setChecklistItems,
     isLoading,
-  } = useAddWorkOrderForm({ handleCancel })
+    handleSubmit,
+    errors,
+    control,
+    getValues,
+  } = useAddWorkOrderForm()
 
   return (
     <Modal
-      open={showModal}
+      open={isModalVisible}
       onCancel={handleCancel}
       onOk={handleOk}
       footer={null}
@@ -129,6 +119,9 @@ export function AddWorkOrderForm(props: Props) {
                 render={({ field }) => (
                   <Select {...field}>
                     <Select.Option value="pending">Pending</Select.Option>
+                    <Select.Option value="in progress">
+                      In progress
+                    </Select.Option>
                     <Select.Option value="completed">Completed</Select.Option>
                   </Select>
                 )}
@@ -139,36 +132,49 @@ export function AddWorkOrderForm(props: Props) {
         </Row>
         <div className="flex flex-col gap-2">
           <h3 className="font-semibold">Checklist</h3>
-          {checklistItems.map((item, index) => (
-            <Form.Item
-              className="mb-0"
-              key={item.task}
-              name={`step-${index + 1}`}
-              validateStatus={errors[`step-${index + 1}`] ? "error" : ""}
-            >
-              <Controller
-                name={`step-${index + 1}`}
-                control={control}
-                render={({ field }) => (
-                  <Input {...field} placeholder={`Step ${index + 1}`} />
-                )}
-                rules={{ required: "Task is required" }}
-              />
-              {errors[`step-${index + 1}`] &&
-                renderErrorMessage(errors[`step-${index + 1}`])}
-            </Form.Item>
+
+          {["step-1", "step-2", "step-3"].map((item, index) => (
+            <Row gutter={16} key={item}>
+              <Col span={16}>
+                <Form.Item
+                  className="mb-0"
+                  name={item}
+                  validateStatus={errors[item] ? "error" : ""}
+                >
+                  <Controller
+                    name={item}
+                    control={control}
+                    render={({ field }) => (
+                      <Input {...field} placeholder={`Step ${index + 1}`} />
+                    )}
+                    rules={{ required: "Task is required" }}
+                  />
+                  {errors[item] && renderErrorMessage(errors[item])}
+                </Form.Item>
+              </Col>
+
+              <Col span={1}>
+                <Form.Item
+                  className="mb-0"
+                  name={`${item}-check`}
+                  validateStatus={errors[item] ? "error" : ""}
+                >
+                  <Controller
+                    name={`${item}-check`}
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <Checkbox
+                          {...field}
+                          checked={getValues(`${item}-check`)}
+                        />
+                      )
+                    }}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
           ))}
-          <Button
-            disabled={checklistItems.length === 3}
-            className="flex items-center justify-center mx-auto border-none mt-3"
-            type="default"
-            icon={<PlusCircleOutlined style={{ fontSize: "24px" }} />}
-            size="small"
-            onClick={() => {
-              const newItem = { task: "", completed: false }
-              setChecklistItems([...checklistItems, newItem])
-            }}
-          />
         </div>
 
         <div className="flex gap-3 justify-center mt-3 border-t-2 border-gray-light pt-3">

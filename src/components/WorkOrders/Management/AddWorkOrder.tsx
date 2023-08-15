@@ -1,11 +1,11 @@
 import { Button } from "antd"
 import { PlusOutlined } from "@ant-design/icons"
-import useAddWorkOrder from "./useAddWorkOrder"
 import { AddWorkOrderForm } from "./AddWorkOrderForm"
+import { useWorkOrdersContext } from "@/context/workOrders/workOrdersContext"
 
 export function AddWorkOrder() {
-  const { showModal, isModalVisible, handleCancel, handleOk } =
-    useAddWorkOrder()
+  const { showModal, handleResetCurrentWorkOrder, currentWorkOrder } =
+    useWorkOrdersContext()
 
   return (
     <div className="flex w-full mb-3 ">
@@ -13,15 +13,13 @@ export function AddWorkOrder() {
         type="primary"
         className="bg-green text-gray-light flex items-center ml-auto hover:bg-blue"
         icon={<PlusOutlined />}
-        onClick={showModal}
+        onClick={() => {
+          showModal()
+        }}
       >
         Add New Work Order
       </Button>
-      <AddWorkOrderForm
-        handleCancel={handleCancel}
-        handleOk={handleOk}
-        showModal={isModalVisible}
-      />
+      <AddWorkOrderForm />
     </div>
   )
 }

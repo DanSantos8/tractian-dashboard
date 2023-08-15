@@ -4,7 +4,7 @@ interface WorkOrder {
 export default function useTasksStatusChart() {
   const getStatusCounts = (data: WorkOrder[]) => {
     const statusCounts = {
-      pending: 5,
+      pending: 0,
       inProgress: 0,
       completed: 0,
     }

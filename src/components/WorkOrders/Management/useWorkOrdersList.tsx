@@ -1,8 +1,11 @@
 import { useGlobalContext } from "@/context/global/GlobalContext"
+import { useWorkOrdersContext } from "@/context/workOrders/workOrdersContext"
 import { transformWorkOrders } from "@/utils/transform/dataSourceTransform"
 import { usersIdToUsersNameTransform } from "@/utils/transform/globalTransform"
+import { WorkOrders } from "@/utils/types"
 
 export default function useWorkOrdersList() {
+  const { showModal, handleCurrentWorkOrder } = useWorkOrdersContext()
   const context = useGlobalContext()
   const { state } = context!
 
@@ -14,6 +17,11 @@ export default function useWorkOrdersList() {
     )
   }
 
+  const handleUpdateWorkOrder = (workOrder: WorkOrders) => {
+    handleCurrentWorkOrder(workOrder)
+    showModal()
+  }
+
   const mapUsersIdToUsersName = (usersId: number[]) =>
     usersIdToUsersNameTransform(usersId, state.users)
 
@@ -21,5 +29,7 @@ export default function useWorkOrdersList() {
     workOrders: transformWorkOrders(state.workOrders),
     getCompletedLabel,
     mapUsersIdToUsersName,
+    showModal,
+    handleUpdateWorkOrder,
   }
 }

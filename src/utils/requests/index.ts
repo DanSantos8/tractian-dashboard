@@ -17,3 +17,6 @@ export const assetsRequest = () =>
 
 export const postWorkOrdersRequest = (body: WorkOrders) =>
   TractianClient.post<{ message: string }>("/workOrders/postWorkOrder", body)
+
+export const updateWorkOrderRequest = (body: WorkOrders) =>
+  TractianClient.put<{ message: string }>("/workOrders/updateWorkOrder", body)

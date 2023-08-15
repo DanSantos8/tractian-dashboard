@@ -4,6 +4,7 @@ import {
   companiesRequest,
   postWorkOrdersRequest,
   unitsRequest,
+  updateWorkOrderRequest,
   usersRequest,
   workOrdersRequest,
 } from "@/utils/requests"
@@ -49,6 +50,22 @@ export function useGlobalService() {
     }
   }
 
+  const updateWorkOrder = async (body: WorkOrders) => {
+    setIsLoading(true)
+    try {
+      const { data } = await updateWorkOrderRequest(body)
+
+      return data
+    } catch (e) {
+      return {
+        message:
+          "For any reason, we couldn't update your work order. But let's move foward to be more fun.",
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   const fetchData = useCallback(async () => {
     return Promise.all([
       unitsRequest(),
@@ -75,6 +92,7 @@ export function useGlobalService() {
       fetchUnits,
       fetchData,
       createWorkOrder,
+      updateWorkOrder,
     },
   }
 }

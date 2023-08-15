@@ -15,11 +15,12 @@ type Action =
   | { type: "ADD_COMPANY"; payload: Company }
   | { type: "ADD_UNIT"; payload: Unit }
   | { type: "ADD_WORK_ORDER"; payload: WorkOrders }
+  | { type: "UPDATE_WORK_ORDER"; payload: WorkOrders }
 
 const GlobalContext = createContext<{
   state: ClientsState
   dispatch: React.Dispatch<Action>
-} | null>(null)
+} | null>(undefined!)
 
 const globalReducer = (state: ClientsState, action: Action): ClientsState => {
   switch (action.type) {
@@ -44,6 +45,20 @@ const globalReducer = (state: ClientsState, action: Action): ClientsState => {
       return {
         ...state,
         workOrders: [...state.workOrders, action.payload],
+      }
+    }
+    case "UPDATE_WORK_ORDER": {
+      const updatedWorkOrder = action.payload
+      const updatedWorkOrders = state.workOrders.map((workOrder) => {
+        if (workOrder.id === updatedWorkOrder.id) {
+          return updatedWorkOrder
+        }
+        return workOrder
+      })
+
+      return {
+        ...state,
+        workOrders: updatedWorkOrders,
       }
     }
 
