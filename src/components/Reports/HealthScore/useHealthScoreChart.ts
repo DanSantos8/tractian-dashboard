@@ -1,14 +1,6 @@
-import React from "react"
-import Highcharts from "highcharts"
-import HighchartsReact from "highcharts-react-official"
 import { useGlobalContext } from "@/context/global/GlobalContext"
 
-interface Asset {
-  name: string
-  healthscore: number
-}
-
-export const HealthscoreBarChart = () => {
+export default function useHealthScoreChart() {
   const context = useGlobalContext()
   const {
     state: { assets },
@@ -28,7 +20,7 @@ export const HealthscoreBarChart = () => {
       text: "Assets Healthscore",
       style: {
         color: "#333",
-        fontSize: "20px", // Slightly larger title font size
+        fontSize: "20px",
         fontWeight: "bold",
       },
     },
@@ -38,7 +30,7 @@ export const HealthscoreBarChart = () => {
         text: "Assets",
         style: {
           color: "#555",
-          fontSize: "10px", // Slightly larger X-axis title font size
+          fontSize: "10px",
         },
       },
       labels: {
@@ -53,7 +45,7 @@ export const HealthscoreBarChart = () => {
         text: "Healthscore",
         style: {
           color: "#555",
-          fontSize: "12px", // Slightly larger Y-axis title font size
+          fontSize: "12px",
         },
       },
       labels: {
@@ -68,10 +60,10 @@ export const HealthscoreBarChart = () => {
         type: "column",
         name: "Healthscore",
         data: healthscores,
-        color: "#3498DB", // Single color for all columns
+        color: "#3498DB",
         dataLabels: {
           enabled: true,
-          format: "{y}", // Show the exact value on top of each column
+          format: "{y}",
           style: {
             color: "#444",
             fontSize: "12px",
@@ -84,5 +76,7 @@ export const HealthscoreBarChart = () => {
     },
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />
+  return {
+    options,
+  }
 }

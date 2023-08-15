@@ -136,7 +136,6 @@ export default function useAddWorkOrderForm() {
   )
 
   useEffect(() => {
-    // Update the defaultValue prop of each Controller when defaultValues change
     setValue("title", defaultValues.title)
     setValue("description", defaultValues.description)
     setValue("asset", defaultValues.asset)

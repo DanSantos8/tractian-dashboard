@@ -81,7 +81,7 @@ export const TaskStatusChart = () => {
       enabled: false,
     },
     legend: {
-      enabled: false, // Remove legend
+      enabled: false,
     },
   }
 

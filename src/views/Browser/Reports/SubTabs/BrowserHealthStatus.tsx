@@ -1,4 +1,4 @@
-import { HealthStatusChart } from "@/components/Reports/Charts"
+import { HealthStatusChart } from "@/components/Reports/"
 
 export default function BrowserHealthStatus() {
   return (

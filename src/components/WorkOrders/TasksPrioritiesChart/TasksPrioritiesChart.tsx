@@ -91,12 +91,12 @@ export const TasksPrioritiesChart = () => {
       rules: [
         {
           condition: {
-            maxWidth: 768, // Adjust the maximum width as needed
+            maxWidth: 768,
           },
           chartOptions: {
             title: {
               style: {
-                fontSize: "20px", // Adjust title font size for responsiveness
+                fontSize: "20px",
               },
             },
             legend: {
@@ -104,7 +104,7 @@ export const TasksPrioritiesChart = () => {
               verticalAlign: "bottom",
               layout: "horizontal",
               itemStyle: {
-                fontSize: "12px", // Adjust legend item font size for responsiveness
+                fontSize: "12px",
               },
             },
             series: [
@@ -112,7 +112,7 @@ export const TasksPrioritiesChart = () => {
                 type: "pie",
                 dataLabels: {
                   style: {
-                    fontSize: "10px", // Adjust data label font size for responsiveness
+                    fontSize: "10px",
                   },
                 },
               },

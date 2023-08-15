@@ -1,4 +1,4 @@
-import { HealthscoreBarChart } from "@/components/Reports/Charts"
+import { HealthscoreBarChart } from "@/components/Reports"
 
 export default function BrowserHelthScore() {
   return (

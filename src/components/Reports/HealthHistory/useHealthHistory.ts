@@ -1,14 +1,6 @@
-import React, { useContext } from "react"
-import Highcharts from "highcharts"
-import HighchartsReact from "highcharts-react-official"
 import { useGlobalContext } from "@/context/global/GlobalContext"
 
-interface Asset {
-  healthHistory: { status: string; timestamp: string }[]
-  name: string
-}
-
-export const HealthHistoryChart = () => {
+export default function useHealthHistoryChart() {
   const context = useGlobalContext()
   const {
     state: { assets },
@@ -87,12 +79,5 @@ export const HealthHistoryChart = () => {
     },
     series: seriesData as Highcharts.SeriesOptionsType[],
   }
-
-  return (
-    <div className="w-full overflow-x-auto">
-      <div className="min-w-[768px]">
-        <HighchartsReact highcharts={Highcharts} options={options} />
-      </div>
-    </div>
-  )
+  return { options }
 }

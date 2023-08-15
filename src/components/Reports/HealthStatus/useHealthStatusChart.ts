@@ -1,6 +1,3 @@
-import React from "react"
-import Highcharts from "highcharts"
-import HighchartsReact from "highcharts-react-official"
 import { useGlobalContext } from "@/context/global/GlobalContext"
 
 enum StatusEnum {
@@ -11,7 +8,7 @@ enum StatusEnum {
   inOperation = "In Operation",
 }
 
-export const HealthStatusChart = () => {
+export default function useHealthStatusChart() {
   const context = useGlobalContext()
   const {
     state: { assets },
@@ -41,7 +38,8 @@ export const HealthStatusChart = () => {
       style: {
         fontFamily: "Montserrat, sans-serif",
       },
-      spacing: [10, 10, 10, 10], // Adjust spacing for responsiveness
+      spacing: [30, 20, 30, 20],
+      height: 600,
     },
     title: {
       text: "Health Status Distribution",
@@ -76,7 +74,7 @@ export const HealthStatusChart = () => {
           style: {
             color: "#444",
             textOutline: "none",
-            fontSize: "14px", // Default font size
+            fontSize: "14px",
           },
         },
         borderWidth: 1,
@@ -90,12 +88,12 @@ export const HealthStatusChart = () => {
       rules: [
         {
           condition: {
-            maxWidth: 768, // Adjust the maximum width as needed
+            maxWidth: 768,
           },
           chartOptions: {
             title: {
               style: {
-                fontSize: "20px", // Adjust title font size for responsiveness
+                fontSize: "20px",
               },
             },
             legend: {
@@ -103,7 +101,7 @@ export const HealthStatusChart = () => {
               verticalAlign: "bottom",
               layout: "horizontal",
               itemStyle: {
-                fontSize: "12px", // Adjust legend item font size for responsiveness
+                fontSize: "12px",
               },
             },
             series: [
@@ -111,7 +109,7 @@ export const HealthStatusChart = () => {
                 type: "pie",
                 dataLabels: {
                   style: {
-                    fontSize: "10px", // Adjust data label font size for responsiveness
+                    fontSize: "10px",
                   },
                 },
               },
@@ -121,12 +119,5 @@ export const HealthStatusChart = () => {
       ],
     },
   }
-
-  return (
-    <div className="w-full overflow-x-auto">
-      <div className="min-w-[420px]">
-        <HighchartsReact highcharts={Highcharts} options={options} />
-      </div>
-    </div>
-  )
+  return { options }
 }
