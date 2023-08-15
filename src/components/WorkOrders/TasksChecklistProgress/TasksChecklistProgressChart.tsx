@@ -22,7 +22,7 @@ export const TasksChecklistProgressChart = () => {
       },
     },
     xAxis: {
-      categories: ["Concluído", "Não Concluído"],
+      categories: ["Completed", "Pending"],
       labels: {
         style: {
           color: "#555",
