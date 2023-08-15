@@ -41,7 +41,7 @@ export const TasksPrioritiesChart = () => {
       text: "Task Priorities Overview",
       align: "center",
       style: {
-        fontFamily: "Copperplate, sans-serif",
+        fontFamily: "Arial, sans-serif",
         fontWeight: "bold",
         fontSize: "32px",
         color: "#2c3e50",
@@ -69,7 +69,7 @@ export const TasksPrioritiesChart = () => {
           format: "<b>{point.name}</b>: {point.percentage:.1f}%",
           distance: -20,
           style: {
-            fontFamily: "Copperplate, sans-serif",
+            fontFamily: "Arial, sans-serif",
             fontSize: "18px",
             color: "#34495e",
           },
@@ -82,7 +82,7 @@ export const TasksPrioritiesChart = () => {
       align: "right",
       verticalAlign: "middle",
       itemStyle: {
-        fontFamily: "Copperplate, sans-serif",
+        fontFamily: "Arial, sans-serif",
         fontSize: "20px",
         color: "#7f8c8d",
       },
