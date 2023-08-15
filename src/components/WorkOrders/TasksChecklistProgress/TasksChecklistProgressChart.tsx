@@ -1,9 +1,9 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { workorders } from "@/mock/datas"
 import { useChartsContext } from "@/context/charts/ChartsContext"
 import useTasksChecklistProgressChart from "./useTasksChecklistProgressChart"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 
 export const TasksChecklistProgressChart = () => {
   const { styles } = useChartsContext()

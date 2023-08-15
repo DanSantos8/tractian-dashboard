@@ -1,6 +1,6 @@
-import { TasksPrioritiesChart } from "@/components/WorkOrders/Charts/TasksPrioritiesChart"
+import { TasksPrioritiesChart } from "@/components/WorkOrders/TasksPrioritiesChart/TasksPrioritiesChart"
 
-export default function BrowserTasksPriorities() {
+export function BrowserTasksPriorities() {
   return (
     <>
       <div className="mt-auto h-full">

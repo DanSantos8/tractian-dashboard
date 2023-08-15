@@ -1,8 +1,8 @@
 import React, { useContext } from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { assets } from "@/mock/datas"
 import { useChartsContext } from "@/context/charts/ChartsContext"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 
 interface Asset {
   healthHistory: { status: string; timestamp: string }[]
@@ -10,10 +10,13 @@ interface Asset {
 }
 
 export const HealthHistoryChart = () => {
-  const data: Asset[] = assets
+  const context = useGlobalContext()
+  const {
+    state: { assets },
+  } = context!
   const { styles } = useChartsContext()
 
-  const seriesData = data.map((asset) => {
+  const seriesData = assets.map((asset) => {
     const series = asset.healthHistory.map((history) => {
       const timestamp = new Date(history.timestamp).getTime()
       const statusValue = history.status === "inOperation" ? 1 : 0

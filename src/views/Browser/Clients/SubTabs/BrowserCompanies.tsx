@@ -6,7 +6,11 @@ export function BrowserCompanies() {
 
   const { state } = context!
 
-  const { renderTable } = useTable({ dataSource: state.companies })
+  const { renderTable } = useTable()
 
-  return <div className="w-full max-w-4xl mx-auto">{renderTable()}</div>
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      {renderTable(state.companies)}
+    </div>
+  )
 }

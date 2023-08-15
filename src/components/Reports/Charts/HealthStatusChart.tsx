@@ -1,17 +1,20 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { assets } from "@/mock/datas"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 
 interface Asset {
   healthHistory: { status: string }[]
 }
 
 export const HealthStatusChart = () => {
-  const data: Asset[] = assets
+  const context = useGlobalContext()
+  const {
+    state: { assets },
+  } = context!
   const statusCounts: { [status: string]: number } = {}
 
-  data.forEach((asset) => {
+  assets.forEach((asset) => {
     asset.healthHistory.forEach((history) => {
       const status = history.status
       if (statusCounts[status]) {

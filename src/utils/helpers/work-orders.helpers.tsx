@@ -11,6 +11,8 @@ enum WorkOrdersSubTabsEnum {
   tasks_checklist_slug = "checklist-progress",
   tasks_assets_status = "Assets status",
   tasks_assets_status_slug = "assets-status",
+  work_orders_management = "Work Orders Management",
+  work_orders_management_slug = "work-orders-management",
 }
 
 export const workOrdersSubTabs = [
@@ -29,6 +31,11 @@ export const workOrdersSubTabs = [
     title: WorkOrdersSubTabsEnum.tasks_checklist,
     slug: WorkOrdersSubTabsEnum.tasks_checklist_slug,
   },
+  {
+    id: 3,
+    title: WorkOrdersSubTabsEnum.work_orders_management,
+    slug: WorkOrdersSubTabsEnum.work_orders_management_slug,
+  },
 ]
 
 export function getWorkOrderCurrentSubTabContent(slug: string) {
@@ -39,5 +46,10 @@ export function getWorkOrderCurrentSubTabContent(slug: string) {
       return <BrowserWorkOrdersSubTabs.BrowserTasksPriorities />
     case WorkOrdersSubTabsEnum.tasks_checklist_slug:
       return <BrowserWorkOrdersSubTabs.BrowserChecklistProgress />
+    case WorkOrdersSubTabsEnum.work_orders_management_slug:
+      return <BrowserWorkOrdersSubTabs.BrowserWorkOrdersManagement />
+
+    default:
+      return null
   }
 }

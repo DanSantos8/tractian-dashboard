@@ -3,7 +3,7 @@ import useSubTabs from "./useSubTabs"
 import { createSlug } from "@/utils/helpers"
 
 export const SubTabs = () => {
-  const { subTabsValues, handleChangeSubTab, currentSubTab } = useSubTabs()
+  const { subTabsValues = [], handleChangeSubTab, currentSubTab } = useSubTabs()
 
   return (
     <div className="flex gap-3">

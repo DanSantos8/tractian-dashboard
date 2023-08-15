@@ -1,6 +1,6 @@
 import * as WorkOrders from "@/components/WorkOrders"
 
-export default function BrowserTasksStatus() {
+export function BrowserTasksStatus() {
   return (
     <>
       <WorkOrders.TasksStatusCardsList />

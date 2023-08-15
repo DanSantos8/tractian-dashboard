@@ -1,14 +1,18 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { workorders } from "@/mock/datas"
 import { useChartsContext } from "@/context/charts/ChartsContext"
 import useTasksStatusChart from "./useTasksStatusChart"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 
 export const TaskStatusChart = () => {
+  const context = useGlobalContext()
+  const {
+    state: { workOrders },
+  } = context!
   const { styles } = useChartsContext()
   const { getStatusCounts } = useTasksStatusChart()
-  const statusCounts = getStatusCounts(workorders)
+  const statusCounts = getStatusCounts(workOrders)
 
   const options: Highcharts.Options = {
     chart: {

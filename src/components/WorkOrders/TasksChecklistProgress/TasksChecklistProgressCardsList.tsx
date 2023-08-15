@@ -1,10 +1,14 @@
+import { useGlobalContext } from "@/context/global/GlobalContext"
 import { Card } from "antd"
-import { workorders } from "@/mock/datas"
 
 export function TasksChecklistProgressCardsList() {
+  const context = useGlobalContext()
+  const {
+    state: { workOrders },
+  } = context!
   return (
     <div className="flex gap-3">
-      {workorders.map((workorder) => {
+      {workOrders.map((workorder) => {
         return (
           <Card key={workorder.id} className="flex-1">
             <h4 className="font-semibold mb-3">{workorder.title}</h4>

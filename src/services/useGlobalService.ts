@@ -2,15 +2,16 @@ import { useCallback } from "react"
 import {
   assetsRequest,
   companiesRequest,
+  postWorkOrdersRequest,
   unitsRequest,
   usersRequest,
   workOrdersRequest,
 } from "@/utils/requests"
 import { useState } from "react"
-import { Company, Unit } from "@/utils/types"
+import { WorkOrders } from "@/utils/types"
 
 export function useGlobalService() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   const fetchCompanies = async () => {
     try {
@@ -30,6 +31,19 @@ export function useGlobalService() {
       return data
     } catch (e) {
       console.log(e)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const createWorkOrder = async (body: WorkOrders) => {
+    setIsLoading(true)
+    try {
+      const { data } = await postWorkOrdersRequest(body)
+
+      return data
+    } catch (e) {
+      return { message: "Error while creating new work order." }
     } finally {
       setIsLoading(false)
     }
@@ -60,6 +74,7 @@ export function useGlobalService() {
       fetchCompanies,
       fetchUnits,
       fetchData,
+      createWorkOrder,
     },
   }
 }

@@ -1,13 +1,18 @@
-import { workorders } from "@/mock/datas"
 import { Card } from "antd"
 import { TColors, useCardsList } from "./useCardsList"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 
 export function TasksStatusCardsList() {
+  const context = useGlobalContext()
+  const {
+    state: { workOrders },
+  } = context!
+
   const { getPendingTasks, colors } = useCardsList()
 
   return (
     <div className="flex  gap-3 mb-3">
-      {workorders.map((workorder) => (
+      {workOrders.map((workorder) => (
         <Card key={workorder.id} className="flex-1">
           <div className="flex flex-col gap-3">
             <h4 className="font-semibold">{workorder.title}</h4>

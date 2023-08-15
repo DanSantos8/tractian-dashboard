@@ -1,20 +1,23 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { assets } from "@/mock/datas"
 import { useReportsContext } from "@/context/reports/ReportsContext"
 import useHealthHistoryChart from "./useHealthHistoryChart"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 
 interface Asset {
   name: string
   healthscore: number
 }
 
-export const HealthscoreBarChart: React.FC = () => {
-  const data: Asset[] = assets
+export const HealthscoreBarChart = () => {
+  const context = useGlobalContext()
+  const {
+    state: { assets },
+  } = context!
 
-  const categories = data.map((asset) => asset.name)
-  const healthscores = data.map((asset) => asset.healthscore)
+  const categories = assets.map((asset) => asset.name)
+  const healthscores = assets.map((asset) => asset.healthscore)
 
   const options: Highcharts.Options = {
     chart: {

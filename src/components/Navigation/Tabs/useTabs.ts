@@ -6,7 +6,7 @@ export enum TabsEnum {
   home = 0,
   reports = 1,
   work_orders = 2,
-  users = 3,
+  users_management = 3,
   clients = 4,
 }
 
@@ -36,7 +36,7 @@ export default function useTabs() {
       description: "Track the maintenance",
     },
     {
-      link: "users",
+      link: "users-management",
       title: "Users",
       description: "Manage your users activities",
     },

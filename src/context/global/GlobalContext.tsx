@@ -14,13 +14,14 @@ type Action =
   | { type: "INITIALIZE_STATE"; payload: ClientsState }
   | { type: "ADD_COMPANY"; payload: Company }
   | { type: "ADD_UNIT"; payload: Unit }
+  | { type: "ADD_WORK_ORDER"; payload: WorkOrders }
 
 const GlobalContext = createContext<{
   state: ClientsState
   dispatch: React.Dispatch<Action>
 } | null>(null)
 
-const clientsReducer = (state: ClientsState, action: Action): ClientsState => {
+const globalReducer = (state: ClientsState, action: Action): ClientsState => {
   switch (action.type) {
     case "INITIALIZE_STATE": {
       return {
@@ -37,6 +38,12 @@ const clientsReducer = (state: ClientsState, action: Action): ClientsState => {
       return {
         ...state,
         units: [...state.units, action.payload],
+      }
+    }
+    case "ADD_WORK_ORDER": {
+      return {
+        ...state,
+        workOrders: [...state.workOrders, action.payload],
       }
     }
 
@@ -56,7 +63,7 @@ const INITIAL_CLIENTS_VALUES: ClientsState = {
 export const GlobalContextProvider: React.FC<{
   children: React.ReactNode
 }> = ({ children }) => {
-  const [state, dispatch] = useReducer(clientsReducer, INITIAL_CLIENTS_VALUES)
+  const [state, dispatch] = useReducer(globalReducer, INITIAL_CLIENTS_VALUES)
   const { callbacks } = useGlobalService()
 
   const { fetchData } = callbacks

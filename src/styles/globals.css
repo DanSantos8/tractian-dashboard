@@ -9,3 +9,7 @@ body {
 [data-highcharts-chart] {
   height: 100%;
 }
+
+.ant-form-inline .ant-form-item {
+  margin-bottom: 8px;
+}

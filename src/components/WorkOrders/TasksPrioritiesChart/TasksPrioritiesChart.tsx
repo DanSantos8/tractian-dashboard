@@ -1,8 +1,8 @@
 import React from "react"
 import Highcharts from "highcharts"
 import HighchartsReact from "highcharts-react-official"
-import { workorders } from "@/mock/datas"
 import { useChartsContext } from "@/context/charts/ChartsContext"
+import { useGlobalContext } from "@/context/global/GlobalContext"
 
 interface WorkOrder {
   priority: string
@@ -23,9 +23,13 @@ const getPriorityCounts = (data: WorkOrder[]) => {
 }
 
 export const TasksPrioritiesChart = () => {
+  const context = useGlobalContext()
+  const {
+    state: { workOrders },
+  } = context!
   const { styles } = useChartsContext()
 
-  const priorityCounts = getPriorityCounts(workorders)
+  const priorityCounts = getPriorityCounts(workOrders)
 
   const options: Highcharts.Options = {
     chart: {

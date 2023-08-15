@@ -1,6 +1,6 @@
 import * as TasksChecklistProgress from "@/components/WorkOrders/TasksChecklistProgress"
 
-export default function BrowserTasksPriorities() {
+export function BrowserChecklistProgress() {
   return (
     <>
       <TasksChecklistProgress.TasksChecklistProgressCardsList />

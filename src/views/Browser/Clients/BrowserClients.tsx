@@ -9,8 +9,6 @@ export default function BrowserClients() {
 
   const { state } = context!
 
-  console.log(state)
-
   const slug = query.subtab ?? ""
 
   return (
