@@ -87,6 +87,40 @@ export const TasksPrioritiesChart = () => {
         color: "#7f8c8d",
       },
     },
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 768, // Adjust the maximum width as needed
+          },
+          chartOptions: {
+            title: {
+              style: {
+                fontSize: "20px", // Adjust title font size for responsiveness
+              },
+            },
+            legend: {
+              align: "center",
+              verticalAlign: "bottom",
+              layout: "horizontal",
+              itemStyle: {
+                fontSize: "12px", // Adjust legend item font size for responsiveness
+              },
+            },
+            series: [
+              {
+                type: "pie",
+                dataLabels: {
+                  style: {
+                    fontSize: "10px", // Adjust data label font size for responsiveness
+                  },
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
   }
 
   return <HighchartsReact highcharts={Highcharts} options={options} />
