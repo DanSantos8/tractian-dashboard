@@ -1,11 +1,19 @@
 import { useGlobalContext } from "@/context/global/GlobalContext"
 import HighchartsReact from "highcharts-react-official"
 import Highcharts from "highcharts"
-import { Card } from "antd"
+import { Card, Spin } from "antd"
 import useHome from "./useHome"
 
 export default function Home() {
-  const { assetsInAlert, formattedStatusLabels, options } = useHome()
+  const { assetsInAlert, formattedStatusLabels, options, assets } = useHome()
+
+  if (!assets.length) {
+    return (
+      <div className="flex justify-center">
+        <Spin />
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-3">

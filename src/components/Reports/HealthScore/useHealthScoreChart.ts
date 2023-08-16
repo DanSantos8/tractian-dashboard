@@ -77,6 +77,7 @@ export default function useHealthScoreChart() {
   }
 
   return {
+    assets,
     options,
   }
 }

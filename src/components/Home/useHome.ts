@@ -100,6 +100,7 @@ export default function useHome() {
   }
 
   return {
+    assets: state.assets,
     formattedStatusLabels,
     assetsInAlert,
     options,
